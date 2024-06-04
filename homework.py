@@ -60,7 +60,7 @@ def main():
             st.subheader('各部門用電狀況')
             department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
             #st.bar_chart(df_department[['年',department_columns]].set_index('年'))
-            df_cal_department=df_department[['年',department_columns]].set_index('年')
+            df_cal_department=df_department
             # 將年份欄位轉換為整數
             df_cal_department['年'] = df_cal_department['年'].astype(int)
 
