@@ -63,7 +63,7 @@ def main():
             df_cal_department['Difference'] = df_cal_department[department_columns].diff()
             df_cal_department = df_cal_department.dropna()
             st.write(df_cal_department)
-            st.bar_chart(df_department_show[['年',"Difference"]].set_index('年'))
+            st.bar_chart(df_department_show[['年','Difference']].set_index('年'))
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
