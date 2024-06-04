@@ -5,7 +5,9 @@ import pandas as pd
 st.set_page_config(
     page_title="資料分析期末",\
     menu_items={
-        "About":"https://www.taipower.com.tw/tc/index.aspx",
+        layout = "wide",
+        "About":"資料來源：[臺電官網](https://www.taipower.com.tw/tc/index.aspx)",
+        #"About":"https://www.taipower.com.tw/tc/index.aspx",
     }
 )
 
@@ -41,7 +43,7 @@ def main():
         show_raw= st.checkbox('顯示原始數據')
 
         if show_raw:
-            col1, col2 = st.columns(2)
+            col1, col2 = st.columns([2, 1])
 
             with col1:
                 sort_option= st.selectbox('排列方式',['年升序','年降序'])
