@@ -8,10 +8,10 @@ def main():
         page_icon = ":rocket:",
         layout = "wide",#wide:靠邊寬形 center:中間窄形
         initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
-        menu_items={
+        menu_items=(
             'about':'網址',
             'get help':'網址'
-        }
+        )
     )
 
     #側邊欄
