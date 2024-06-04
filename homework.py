@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+
 #工作列
 st.set_page_config(
     page_title="我的lit",
@@ -7,9 +8,11 @@ st.set_page_config(
     layout = "wide",#wide:靠邊寬形 center:中間窄形
     initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
     #menu_items={
-        #'About':'網址',
-        #'Get help':'網址'
+        #"About":"網址",
+        #"Get help":"網址"
     #}
+
+
 )
 
 #側邊欄
@@ -19,7 +22,7 @@ st.sidebar.selectbox("下拉選單",['選項一','選項二'])
 
 st.title("我的lit")
 st.write("這是範例")
-
+st.button('我是按鈕')
 def main():
 
 
@@ -27,6 +30,11 @@ def main():
     st.title('臺灣能源現況')
     #普通文字
     st.write('410971105 顏詠璇 資料分析期末')
+    #下拉文字
+    with st.expander('使用指南'):
+        st.write('行一')
+        st.write('行二')
+        st.write('行三')
 
     #輸入互動元素
     name= st.text_input('請輸入文字:')
