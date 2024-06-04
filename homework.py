@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(
     page_title="資料分析期末",
     layout = "wide",
-    initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
+    initial_sidebar_state="expanded",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
     menu_items={
         "About":"https://www.taipower.com.tw/tc/index.aspx",
     }
@@ -19,6 +19,10 @@ def main():
     tab1, tab2 = st.tabs(["主介面", "臺灣能源政策目標"])
 
     with tab1:
+        st.sidebar.header('側邊欄header')
+        st.sidebar.text('側邊欄文字')
+        st.sidebar.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
+
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
         dfshow = df.rename(columns={'年':'index'}).set_index('index')
         st.subheader('裝置容量結構')
