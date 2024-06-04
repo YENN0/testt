@@ -20,10 +20,10 @@ def main():
 
     with tab1:
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
-        df = df.rename(columns={'年':'index'}).set_index('index')
+        dfshow = df.rename(columns={'年':'index'}).set_index('index')
         st.subheader('裝置容量結構')
-        st.line_chart(df)
-        st.bar_chart(df)
+        st.line_chart(dfshow)
+        st.bar_chart(dfshow)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
