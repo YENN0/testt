@@ -42,7 +42,7 @@ def main():
             start_date = pd.Timestamp(date_range[0])
             end_date = pd.Timestamp(date_range[1])
 
-            filtered_df = df[(df['日期']>=start_date)&df(['日期']<=end_date)]
+            filtered_df = df[(df['日期']>=start_date)&(df['日期']<=end_date)]
 
             st.write('篩選後的')
             st.write(filtered_df)
