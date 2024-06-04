@@ -42,7 +42,7 @@ def main():
                 elif chart_type == '柱狀圖':
                     st.bar_chart(df_capa_show)
         with col_main2:
-            df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
+            df_department = pd.read_excel('https://github.com/YENN0/testt/raw/main/DepartmentConsumption.xlsx',engine='openpyxl')
             df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
             st.subheader('各部門用電占比')
             multiselected_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
