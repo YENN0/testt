@@ -1,18 +1,16 @@
 import streamlit as st
 import pandas as pd
-
-def main():
-    #工作列
-    st.set_page_config(
-        page_title="我的lit",
-        page_icon = ":rocket:",
-        layout = "wide",#wide:靠邊寬形 center:中間窄形
-        initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
-        menu_items=(
-            #'about':'網址',
-            #'get help':'網址'
-        )
-    )
+#工作列
+st.set_page_config(
+    page_title="我的lit",
+    page_icon = ":rocket:",
+    layout = "wide",#wide:靠邊寬形 center:中間窄形
+    initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
+    menu_items={
+        'About':'網址',
+        'Get help':'網址'
+    }
+)
 
     #側邊欄
     st.sidebar.header('側邊欄header')
@@ -21,6 +19,8 @@ def main():
 
     st.title("我的lit")
     st.write("這是範例")
+def main():
+
 
     #SHOW標題
     st.title('臺灣能源現況')
