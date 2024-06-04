@@ -30,7 +30,7 @@ def main():
     #選擇顯示的欄位
     if df is not None:
 
-        show_summary= st.checkbos('顯示摘要')
+        show_summary= st.checkbox('顯示摘要')
 
         if show_summary:
             st.write('數據統計摘要')
