@@ -65,7 +65,7 @@ def main():
             df_cal_department['年'] = df_cal_department['年'].astype(int)
 
             # 計算後一年份減去前一年份的量
-            df_cal_department['Difference'] = df_cal_department.groupby('department_columns').diff()
+            df_cal_department['Difference'] = df_cal_department.groupby(department_columns).diff()
 
             # 移除第一年份的資料
             df_cal_department = df_cal_department.dropna()
