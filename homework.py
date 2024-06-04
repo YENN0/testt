@@ -50,7 +50,7 @@ def main():
         st.bar_chart(df[['日期',selected_column]].set_index('日期'))
 
         #選擇圖表類型
-        chart_type=st.selectbox('選擇圖表類型',['折線圖'],['柱狀圖'],['散點圖'])
+        chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖','散點圖'])
         if chart_type == '折線圖':
             st.line_chart(df[selected_column])
         elif chart_type == '柱狀圖':
