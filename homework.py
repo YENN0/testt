@@ -23,27 +23,15 @@ def main():
 
         #顯示數據
         st.write('原始數據')
-        sored_data = df.sort_values(by='年',ascending=False)
+        sort_option= st.selectbox('排列方式',['升序','降序'])
+        if sort_option == '升序':
+            sored_data = df.sort_values(by='年',ascending=True)
+        else:
+            sored_data = df.sort_values(by='年',ascending=False)
+
         st.write(sored_data)
         #選擇顯示的欄位
         if df is not None:
-            #日期區間選擇
-            if '年' in df.columns:
-                df['年'] = pd.to_datetime(df['年'])
-                #設定區間
-                min_date = df['年'].min().year()
-                max_date = df['年'].max().year()
-
-                #日期元件
-                date_range = st.date_input('選擇年範圍',(min_date,max_date))
-                start_date = pd.Timestamp(date_range[0])
-                end_date = pd.Timestamp(date_range[1])
-
-                filtered_df = df[(df['年']>=start_date)&df(['年']<=end_date)]
-
-                st.write('篩選後的')
-                st.write(filtered_df)
-
             show_summary= st.checkbox('顯示摘要')
 
             if show_summary:
