@@ -40,7 +40,7 @@ def main():
 
         if multiselected_columns:
             st.write('已選擇')
-            st,write(df[multiselected_columns])
+            st.write(df[multiselected_columns])
 
         #單一選擇欄位
         selected_column = st.selectbox('選擇要用在柱狀圖的列',['銷售金額','訂單數量'])
