@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 #工作列
 st.set_page_config(
@@ -20,13 +21,13 @@ def main():
 
     with tab1:
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
-
+        st.line_chart(df)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
         if show_raw:
             sort_option= st.selectbox('排列方式',['年升序','年降序'])
-            if sort_option == '升序':
+            if sort_option == '年升序':
                 sored_data = df.sort_values(by='年',ascending=True)
             else:
                 sored_data = df.sort_values(by='年',ascending=False)
@@ -64,7 +65,7 @@ def main():
         #選擇圖表類型
         chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖','散點圖'])
         if chart_type == '折線圖':
-            st.line_chart(df[selected_column])
+            
         elif chart_type == '柱狀圖':
             st.bar_chart(df[selected_column])
         elif chart_type == '散點圖':
