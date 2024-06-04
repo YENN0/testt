@@ -42,7 +42,7 @@ def main():
                 elif chart_type == '柱狀圖':
                     st.bar_chart(df_capa_show)
         with col_main2:
-
+            st.header("再生能源裝置")
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
