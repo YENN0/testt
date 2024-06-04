@@ -2,6 +2,26 @@ import streamlit as st
 import pandas as pd
 
 def main():
+    #工作列
+    st.set_page_config(
+        page_title="我的lit",
+        page_icon = ":rocket:",
+        layout = "wide",#wide:靠邊寬形 center:中間窄形
+        initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
+        menu_items={
+            'about':'網址',
+            'get help':'網址'
+        }
+    )
+
+    #側邊欄
+    st.sidebar.header('側邊欄header')
+    st.sidebar.text('側邊欄文字')
+    st.sidebar.selectbox("下拉選單",['選項一','選項二'])
+
+    st.title("我的lit")
+    st.write("這是範例")
+
     #SHOW標題
     st.title('臺灣能源現況')
     #普通文字
@@ -42,7 +62,7 @@ def main():
             start_date = pd.Timestamp(date_range[0])
             end_date = pd.Timestamp(date_range[1])
 
-            filtered_df = df[(df['日期']>=start_date)&(df['日期']<=end_date)]
+            filtered_df = df[(df['日期']>=start_date)&df(['日期']<=end_date)]
 
             st.write('篩選後的')
             st.write(filtered_df)
