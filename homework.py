@@ -1,33 +1,30 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-st.title('臺灣能源統計')
 
-DATE_COLUMN = 'date/time'
-DATA_URL = ('https://s3-us-west-2.amazonaws.com/' 'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+def main():
+    st.title('臺灣能源現況') #SHOW標題
+    st.write('410971105 顏詠璇 資料分析期末')#普通文字
+    
+    name= st.text_input('請輸入文字:')#輸入互動元素
+    if name: #將輸入文字顯示
+        st.write(f'你好,{name}')
+#上傳數據
+    uploaded_file= st.file_uploader('上傳文件:CSV',type=['csv','xlsx'])#上傳檔案元件
+    if uploaded_file is not None:
+        file_extension= uploaded_file.name.split(".")[-1]
+        if file_extension.lower()=='csv':
+            df=pd.read_csv(uploaded_file)
+        else:
+            df=pd.read_excel(uploaded_file,engine='openpyxl')
 
-@st.cache_data 
-def load_data(nrows): 
-    data = pd.read_csv(DATA_URL, nrows=nrows) 
-    lowercase = lambda x: str(x).lower() 
-    data.rename(lowercase, axis='columns', inplace=True) 
-    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-    return data
+    #顯示數據
+    st.write('原始數據')
+    st.write(df)
+    #選擇欄位
+    selected_column = st.selectbox('選擇要用在柱狀圖的列',['銷售金額','訂單數量'])
+    #視覺化
+    st.write('數據視覺化')
+    st.bar_chart(df[['日期',selected_column]].set_index('日期'))
 
-# Create a text element and let the reader know the data is loading. 
-data_load_state = st.text('Loading data...')
-# Load 10,000 rows of data into the dataframe. 
-data = load_data(10000)
-# Notify the reader that the data was successfully loaded.
-data_load_state.text("Done! (using st.cache_data)")
-
-if st.checkbox('Show raw data'): 
-    st.subheader('Raw data')
-    st.write(data)
-
-st.subheader('Number of pickups by hour') 
-hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
-st.bar_chart(hist_values)
-
-st.subheader('Map of all pickups')
-st.map(data)
+if __name__ == '__main__':
+    main()
