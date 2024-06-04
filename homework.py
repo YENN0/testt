@@ -22,6 +22,7 @@ def main():
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
         st.subheader('裝置容量結構')
         st.line_chart(df)
+        st.bar_chart(df)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
