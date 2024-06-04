@@ -54,8 +54,29 @@ def main():
 
         col_main3, col_main4 = st.columns(2)
         with col_main3:
-            st.subheader('各機組發電量')
-            
+            df_buy = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
+            df_buy_show = df_buy
+            st.subheader('各地區購電量')
+            Taiwan = {
+                "區域": ["基隆市", "台北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"],
+                "經度": [121.627, 121.561, 121.447, 121.282, 120.979, 121.019, 120.933, 120.646, 120.479, 120.960, 120.431, 120.445,120.322,120.408,120.674,121.613,121.383,121.013,119.594,118.383,119.937],
+                "緯度": [25.138, 25.063, 25.067, 24.916, 24.800, 24.820, 24.473, 24.162, 23.962, 23.872, 23.728, 23.485,23.161,22.745,22.473,24.552,23.778,22.903,23.568,24.465,26.154],
+            }
+
+            df_location = pd.DataFrame(Taiwan)
+
+            df_combined = pd.merge(df_buy_show, df_location, left_on='縣市', right_on='區域')
+
+            st.map(df_combined,
+                latitude='緯度',
+                longitude='經度',
+                size='風力'
+            )
+
+            st.map(df_combined,
+                latitude='緯度',
+                longitude='經度', size=100, color='#0044ff')
+
         with col_main4:
             st.subheader('各部門用電狀況')
             department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
