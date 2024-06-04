@@ -45,12 +45,21 @@ def main():
             df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
             df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
             st.subheader('各部門用電占比')
-            multi_department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
+            multi_department_columns = st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
             if multi_department_columns:
                 df_department_selected = df_department_show[multi_department_columns]
                 st.bar_chart(df_department_selected)
             else:
                 st.bar_chart(df_department_show)
+
+                col_main3, col_main4 = st.columns(2)
+        with col_main3:
+            st.subheader('各機組發電量')
+            
+        with col_main4:
+            st.subheader('各部門用電狀況')
+            department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
+            st.bar_chart(df[['年',department_columns]].set_index('年'))
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
