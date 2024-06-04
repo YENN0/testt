@@ -23,7 +23,7 @@ def main():
         with col_main1:
             df_capa = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
             df_capa_show = df_capa.rename(columns={'年':'index'}).set_index('index')
-            st.subheader('裝置容量結構')
+            st.subheader('各機組發電量')
             col_capa1, col_capa2 = st.columns(2)
             with col_capa1:
                 multiselected_columns = st.multiselect('選擇要顯示的列',df_capa_show.columns)
@@ -42,7 +42,15 @@ def main():
                 elif chart_type == '柱狀圖':
                     st.bar_chart(df_capa_show)
         with col_main2:
-            st.header("再生能源裝置")
+            df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
+            df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
+            st.subheader('各部門用電占比')
+            multiselected_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
+            if multiselected_columns:
+                df_capa_selected = df_department_show[multiselected_columns]
+                st.line_chart(df_department)
+            else:
+                st.line_chart(df_department_show)
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
