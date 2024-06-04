@@ -41,19 +41,22 @@ def main():
         show_raw= st.checkbox('顯示原始數據')
 
         if show_raw:
-            sort_option= st.selectbox('排列方式',['年升序','年降序'])
-            if sort_option == '年升序':
-                sored_data = df.sort_values(by='年',ascending=True)
-            else:
-                sored_data = df.sort_values(by='年',ascending=False)
+            col1, col2 = st.columns(2)
 
-            st.write(sored_data)
-        #選擇顯示的欄位
-            show_summary= st.checkbox('顯示摘要')
+            with col1:
+                sort_option= st.selectbox('排列方式',['年升序','年降序'])
+                if sort_option == '年升序':
+                    sored_data = df.sort_values(by='年',ascending=True)
+                else:
+                    sored_data = df.sort_values(by='年',ascending=False)
 
-            if show_summary:
-                st.write('數據統計摘要')
-                st.write(df.describe())
+                st.write(sored_data)
+            with col2:
+                show_summary= st.checkbox('顯示摘要')
+
+                if show_summary:
+                    st.write('數據統計摘要')
+                    st.write(df.describe())
     with tab2:
         st.header("臺灣能源政策")
         with st.expander('前言'):
