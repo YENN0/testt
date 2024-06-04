@@ -32,7 +32,7 @@ def main():
 
         #日期區間選擇
         if '日期' in df.columns:
-            df['日期'] = pd.tp_datetime(df['日期'])
+            df['日期'] = pd.to_datetime(df['日期'])
             #設定區間
             min_date = df['日期'].min().date()
             max_date = df['日期'].max().date()
