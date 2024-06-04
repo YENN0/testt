@@ -3,9 +3,9 @@ import pandas as pd
 
 #工作列
 st.set_page_config(
-    page_title="資料分析期末",\
+    page_title="資料分析期末",
+    layout = "wide",
     menu_items={
-        layout = "wide",
         "About":"資料來源：[臺電官網](https://www.taipower.com.tw/tc/index.aspx)",
         #"About":"https://www.taipower.com.tw/tc/index.aspx",
     }
