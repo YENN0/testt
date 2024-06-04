@@ -30,6 +30,23 @@ def main():
     #選擇顯示的欄位
     if df is not None:
 
+        #日期區間選擇
+        if '日期' in df.columns:
+            df['日期'] = pd.tp_datetime(df['日期'])
+            #設定區間
+            min_date = df['日期'].min().date()
+            max_date = df['日期'].max().date()
+
+            #日期元件
+            date_range = st.date_input('選擇日期範圍',(min_date,max_date))
+            start_date = pd.Timestamp(date_range[0])
+            end_date = pd.Timestamp(date_range[1])
+
+            filtered_df = df[df(['日期']>=start_date)&df(['日期']<=end_date)]
+
+            st.write('篩選後的')
+            st.write(filtered_df)
+
         show_summary= st.checkbox('顯示摘要')
 
         if show_summary:
