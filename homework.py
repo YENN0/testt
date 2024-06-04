@@ -45,8 +45,8 @@ def main():
             df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
             df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
             st.subheader('各部門用電占比')
-            multiselected_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
-            if multiselected_columns:
+            multi_department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
+            if multi_department_columns:
                 df_capa_selected = df_department_show[multiselected_columns]
                 st.line_chart(df_department)
             else:
