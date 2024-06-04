@@ -22,8 +22,22 @@ def main():
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
         dfshow = df.rename(columns={'年':'index'}).set_index('index')
         st.subheader('裝置容量結構')
-        st.line_chart(dfshow)
-        st.bar_chart(dfshow)
+
+        multiselected_columns = st.multiselect('選擇要顯示的列',df.columns)
+
+        if multiselected_columns:
+            st.write('已選擇')
+            st.write(df[multiselected_columns])
+            #單一選擇欄位
+            selected_column = st.selectbox('選擇要用在柱狀圖的列',['再生能源','抽序水力','核能','燃氣','燃油','燃煤'])
+            #視覺化
+            st.write('數據視覺化')
+            st.bar_chart(df[['年',selected_column]].set_index('年'))
+        chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
+        if chart_type == '折線圖':
+            st.line_chart(dfshow)
+        elif chart_type == '柱狀圖':
+            st.bar_chart(dfshow)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
@@ -48,31 +62,6 @@ def main():
             st.write('111年12月公布「12項關鍵戰略行動計畫」')
             st.write('112年1月核定「淨零排放路徑112-115年綱要計畫」，針對淨零碳排目標進行各面向的減緩與調適。')
             st.write('112年2月15日總統公布施行《氣候變遷因應法》，並納入2050年淨零排放目標、提升氣候治理層級、徵收碳費專款專用、增訂氣候變遷調適專章、納入碳足跡及產品標示管理機制')
-
-    
-'''
-        multiselected_columns = st.multiselect('選擇要顯示的列',df.columns)
-
-        if multiselected_columns:
-            st.write('已選擇')
-            st.write(df[multiselected_columns])
-
-        #單一選擇欄位
-        selected_column = st.selectbox('選擇要用在柱狀圖的列',['銷售金額','訂單數量'])
-
-        #視覺化
-        st.write('數據視覺化')
-        st.bar_chart(df[['日期',selected_column]].set_index('日期'))
-
-        #選擇圖表類型
-        chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖','散點圖'])
-        if chart_type == '折線圖':
-            
-        elif chart_type == '柱狀圖':
-            st.bar_chart(df[selected_column])
-        elif chart_type == '散點圖':
-            st.scatter_chart(df[selected_column])
-'''
 
 
 if __name__ == '__main__':
