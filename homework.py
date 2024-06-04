@@ -6,19 +6,20 @@ st.set_page_config(
     page_icon = ":rocket:",
     layout = "wide",#wide:靠邊寬形 center:中間窄形
     initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
-    menu_items={
-        'About':'網址',
-        'Get help':'網址'
-    }
+    #menu_items={
+        #'About':'網址',
+        #'Get help':'網址'
+    #}
 )
 
-    #側邊欄
-    st.sidebar.header('側邊欄header')
-    st.sidebar.text('側邊欄文字')
-    st.sidebar.selectbox("下拉選單",['選項一','選項二'])
+#側邊欄
+st.sidebar.header('側邊欄header')
+st.sidebar.text('側邊欄文字')
+st.sidebar.selectbox("下拉選單",['選項一','選項二'])
 
-    st.title("我的lit")
-    st.write("這是範例")
+st.title("我的lit")
+st.write("這是範例")
+
 def main():
 
 
