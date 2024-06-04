@@ -58,11 +58,11 @@ def main():
             
         with col_main4:
             st.subheader('各部門用電狀況')
-            department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
+            department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
             df_cal_department=df_department
             df_cal_department['Difference'] = df_cal_department[department_columns].diff()
             df_cal_department = df_cal_department.dropna()
-            st.write(df_cal_department)
+            df_cal_department = df_cal_department.drop(df_cal_department.index[-1])
             df_cal_department_selected = df_cal_department['Difference']
             st.bar_chart(df_cal_department_selected)
             
