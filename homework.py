@@ -3,75 +3,52 @@ import pandas as pd
 
 #工作列
 st.set_page_config(
-    page_title="我的lit",
-    page_icon = ":rocket:",
-    layout = "wide",#wide:靠邊寬形 center:中間窄形
+    page_title="資料分析期末",
+    layout = "wide",
     initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
-    #menu_items={
-        #"About":"網址",
-        #"Get help":"網址"
-    #}
-
-
+    menu_items={
+        "About":"https://www.taipower.com.tw/tc/index.aspx",
+    }
 )
 
-#側邊欄
-st.sidebar.header('側邊欄header')
-st.sidebar.text('側邊欄文字')
-st.sidebar.selectbox("下拉選單",['選項一','選項二'])
+tab1, tab2 = st.tabs(["主介面", "臺灣能源政策目標"])
 
-st.title("我的lit")
-st.write("這是範例")
-st.button('我是按鈕')
+with tab1:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+with tab2:
+    st.header("臺灣能源政策")
+    with st.expander('前言'):
+        st.write('111年3月公布「臺灣2050淨零排放路徑及策略總說明」')
+        st.write('111年12月公布「12項關鍵戰略行動計畫」')
+        st.write('112年1月核定「淨零排放路徑112-115年綱要計畫」，針對淨零碳排目標進行各面向的減緩與調適。')
+        st.write('112年2月15日總統公布施行《氣候變遷因應法》，並納入2050年淨零排放目標、提升氣候治理層級、徵收碳費專款專用、增訂氣候變遷調適專章、納入碳足跡及產品標示管理機制')
+
 def main():
-
-
-    #SHOW標題
     st.title('臺灣能源現況')
-    #普通文字
     st.write('410971105 顏詠璇 資料分析期末')
-    #下拉文字
-    with st.expander('使用指南'):
-        st.write('行一')
-        st.write('行二')
-        st.write('行三')
-
-    #輸入互動元素
-    name= st.text_input('請輸入文字:')
-    #print輸入文字
-    if name:
-        st.write(f'你好,{name}')
-
-    #上傳數據
-    uploaded_file= st.file_uploader('上傳文件:CSV',type=['csv','xlsx'])#上傳檔案元件
-    df=None #初始化表格
-
-    if uploaded_file is not None:
-        file_extension= uploaded_file.name.split(".")[-1]
-        if file_extension.lower()=='csv':
-            df=pd.read_csv(uploaded_file)
-        else:
-            df=pd.read_excel(uploaded_file,engine='openpyxl')
+    
+    df = pd.read_csv('https://github.com/YENN0/testt/blob/main/capacity%20classification.csv')
 
     #顯示數據
     st.write('原始數據')
     st.write(df)
     #選擇顯示的欄位
     if df is not None:
-
         #日期區間選擇
         if '日期' in df.columns:
-            df['日期'] = pd.to_datetime(df['日期'])
+            df['年'] = pd.to_datetime(df['年'])
             #設定區間
-            min_date = df['日期'].min().date()
-            max_date = df['日期'].max().date()
+            min_date = df['年'].min().year()
+            max_date = df['年'].max().year()
 
             #日期元件
-            date_range = st.date_input('選擇日期範圍',(min_date,max_date))
+            date_range = st.date_input('選擇年範圍',(min_date,max_date))
             start_date = pd.Timestamp(date_range[0])
             end_date = pd.Timestamp(date_range[1])
 
-            filtered_df = df[(df['日期']>=start_date)&df(['日期']<=end_date)]
+            filtered_df = df[(df['年']>=start_date)&df(['年']<=end_date)]
 
             st.write('篩選後的')
             st.write(filtered_df)
@@ -81,7 +58,7 @@ def main():
         if show_summary:
             st.write('數據統計摘要')
             st.write(df.describe())
-
+'''
         multiselected_columns = st.multiselect('選擇要顯示的列',df.columns)
 
         if multiselected_columns:
@@ -103,6 +80,7 @@ def main():
             st.bar_chart(df[selected_column])
         elif chart_type == '散點圖':
             st.scatter_chart(df[selected_column])
+'''
 
 
 if __name__ == '__main__':
