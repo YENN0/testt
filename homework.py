@@ -62,7 +62,7 @@ def main():
             #st.bar_chart(df_department[['年',department_columns]].set_index('年'))
             df_cal_department=df_department[['年',department_columns]].set_index('年')
             # 將年份欄位轉換為整數
-            df_cal_department['Year'] = df_cal_department['Year'].astype(int)
+            df_cal_department['年'] = df_cal_department['年'].astype(int)
 
             # 計算後一年份減去前一年份的量
             df_cal_department['Difference'] = df_cal_department.groupby('Type')['Value'].diff()
@@ -75,7 +75,7 @@ def main():
             plt.bar(df_cal_department['Type'], df_cal_department['Difference'])
             plt.xlabel('Type')
             plt.ylabel('Difference')
-            plt.title('Difference between Current Year and Previous Year')
+            plt.title('Difference between Current 年 and Previous 年')
             plt.xticks(rotation=45)
             plt.tight_layout()
 
