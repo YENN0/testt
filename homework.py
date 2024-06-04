@@ -52,14 +52,14 @@ def main():
             else:
                 st.bar_chart(df_department_show)
 
-                col_main3, col_main4 = st.columns(2)
+        col_main3, col_main4 = st.columns(2)
         with col_main3:
             st.subheader('各機組發電量')
             
         with col_main4:
             st.subheader('各部門用電狀況')
             department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
-            st.bar_chart(df_department_show[['年',department_columns]].set_index('年'))
+            st.bar_chart(df_department[['年',department_columns]].set_index('年'))
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
