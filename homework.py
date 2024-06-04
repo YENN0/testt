@@ -62,7 +62,7 @@ def main():
             df_cal_department=df_department
             df_cal_department['Difference'] = df_cal_department[department_columns].diff()
             df_cal_department = df_cal_department.dropna()
-
+            st.write(df_cal_department())
             # 繪製柱狀圖
             plt.figure(figsize=(10, 6))
             plt.bar(df_cal_department['Type'], df_cal_department['Difference'])
