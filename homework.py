@@ -15,14 +15,14 @@ def main():
 
     #上傳數據
     uploaded_file= st.file_uploader('上傳文件:CSV',type=['csv','xlsx'])#上傳檔案元件
+    df=None #初始化表格
+
     if uploaded_file is not None:
         file_extension= uploaded_file.name.split(".")[-1]
         if file_extension.lower()=='csv':
             df=pd.read_csv(uploaded_file)
         else:
             df=pd.read_excel(uploaded_file,engine='openpyxl')
-
-    df=None #初始化表格
 
     #顯示數據
     st.write('原始數據')
