@@ -22,16 +22,17 @@ def main():
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
 
         #顯示數據
-        st.write('原始數據')
-        sort_option= st.selectbox('排列方式',['升序','降序'])
-        if sort_option == '升序':
-            sored_data = df.sort_values(by='年',ascending=True)
-        else:
-            sored_data = df.sort_values(by='年',ascending=False)
+        show_raw= st.checkbox('顯示原始數據')
 
-        st.write(sored_data)
+        if show_raw:
+            sort_option= st.selectbox('排列方式',['年升序','年降序'])
+            if sort_option == '升序':
+                sored_data = df.sort_values(by='年',ascending=True)
+            else:
+                sored_data = df.sort_values(by='年',ascending=False)
+
+            st.write(sored_data)
         #選擇顯示的欄位
-        if df is not None:
             show_summary= st.checkbox('顯示摘要')
 
             if show_summary:
