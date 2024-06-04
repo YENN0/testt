@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 #工作列
 st.set_page_config(
@@ -20,6 +21,7 @@ def main():
 
     with tab1:
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
+        st.subheader('裝置容量結構')
         st.line_chart(df)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
