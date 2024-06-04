@@ -35,9 +35,9 @@ def main():
         else:
             chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
             if chart_type == '折線圖':
-                st.line_chart(df_selected)
+                st.line_chart(dfshow)
             elif chart_type == '柱狀圖':
-                st.bar_chart(df_selected)
+                st.bar_chart(dfshow)
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
