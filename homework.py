@@ -4,6 +4,7 @@ import pandas as pd
 #工作列
 st.set_page_config(
     page_title="資料分析期末",
+    layout = "wide",
     menu_items={
         "About":"資料來源：[臺電官網](https://www.taipower.com.tw/tc/index.aspx)",
         #"About":"https://www.taipower.com.tw/tc/index.aspx",
@@ -21,18 +22,19 @@ def main():
         df = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/capacity%20classification.csv')
         dfshow = df.rename(columns={'年':'index'}).set_index('index')
         st.subheader('裝置容量結構')
-
-        multiselected_columns = st.multiselect('選擇要顯示的列',dfshow.columns)
-
+        col1a, col2a = st.columns(2)
+        with col1a:
+            multiselected_columns = st.multiselect('選擇要顯示的列',dfshow.columns)
+        with col2a:
+             chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
+        
         if multiselected_columns:
             df_selected = dfshow[multiselected_columns]
-            chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
             if chart_type == '折線圖':
                 st.line_chart(df_selected)
             elif chart_type == '柱狀圖':
                 st.bar_chart(df_selected)
         else:
-            chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
             if chart_type == '折線圖':
                 st.line_chart(dfshow)
             elif chart_type == '柱狀圖':
@@ -42,9 +44,9 @@ def main():
         show_raw= st.checkbox('顯示原始數據')
 
         if show_raw:
-            col1, col2 = st.columns([2, 1])
+            col1b, col2b = st.columns([2, 1])
 
-            with col1:
+            with col1b:
                 sort_option= st.selectbox('排列方式',['年升序','年降序'])
                 if sort_option == '年升序':
                     sored_data = df.sort_values(by='年',ascending=True)
@@ -52,12 +54,9 @@ def main():
                     sored_data = df.sort_values(by='年',ascending=False)
 
                 st.write(sored_data)
-            with col2:
-                show_summary= st.checkbox('顯示摘要')
-
-                if show_summary:
-                    st.write('數據統計摘要')
-                    st.write(df.describe())
+            with col2b:
+                st.write('數據統計摘要')
+                st.write(df.describe())
     with tab2:
         st.header("臺灣能源政策")
         with st.expander('前言'):
