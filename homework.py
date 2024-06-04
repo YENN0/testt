@@ -23,11 +23,12 @@ def main():
 
         #顯示數據
         st.write('原始數據')
-        st.write(df)
+        sored_data = df.sort_values(by='年',ascending=False)
+        st.write(sored_data)
         #選擇顯示的欄位
         if df is not None:
             #日期區間選擇
-            if '日期' in df.columns:
+            if '年' in df.columns:
                 df['年'] = pd.to_datetime(df['年'])
                 #設定區間
                 min_date = df['年'].min().year()
