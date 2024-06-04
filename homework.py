@@ -23,10 +23,16 @@ def main():
         dfshow = df.rename(columns={'年':'index'}).set_index('index')
         st.subheader('裝置容量結構')
 
-        multiselected_columns = st.multiselect('選擇要顯示的列',df.columns)
+        multiselected_columns = st.multiselect('選擇要顯示的列',dfshow.columns)
 
         if multiselected_columns:
             df_selected = dfshow[multiselected_columns]
+            chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
+            if chart_type == '折線圖':
+                st.line_chart(df_selected)
+            elif chart_type == '柱狀圖':
+                st.bar_chart(df_selected)
+        else:
             chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
             if chart_type == '折線圖':
                 st.line_chart(df_selected)
