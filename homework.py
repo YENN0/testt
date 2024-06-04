@@ -47,8 +47,8 @@ def main():
             st.subheader('各部門用電占比')
             multi_department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
             if multi_department_columns:
-                df_capa_selected = df_department_show[multiselected_columns]
-                st.line_chart(df_department)
+                df_department_selected = df_department_show[multiselected_columns]
+                st.line_chart(df_department_selected)
             else:
                 st.line_chart(df_department_show)
         
