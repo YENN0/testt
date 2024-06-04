@@ -59,7 +59,28 @@ def main():
         with col_main4:
             st.subheader('各部門用電狀況')
             department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
-            st.bar_chart(df_department[['年',department_columns]].set_index('年'))
+            #st.bar_chart(df_department[['年',department_columns]].set_index('年'))
+            df_cal_department=df_department[['年',department_columns]].set_index('年')
+            # 將年份欄位轉換為整數
+            df_cal_department['Year'] = df_cal_department['Year'].astype(int)
+
+            # 計算後一年份減去前一年份的量
+            df_cal_department['Difference'] = df_cal_department.groupby('Type')['Value'].diff()
+
+            # 移除第一年份的資料
+            df_cal_department = df_cal_department.dropna()
+
+            # 繪製柱狀圖
+            plt.figure(figsize=(10, 6))
+            plt.bar(df_cal_department['Type'], df_cal_department['Difference'])
+            plt.xlabel('Type')
+            plt.ylabel('Difference')
+            plt.title('Difference between Current Year and Previous Year')
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+
+            # 顯示柱狀圖
+            st.pyplot(plt)
         
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
