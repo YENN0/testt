@@ -26,13 +26,13 @@ def main():
         multiselected_columns = st.multiselect('選擇要顯示的列',df.columns)
 
         if multiselected_columns:
-            st.write('數據視覺化')
-            st.bar_chart(df[['年',multiselected_columns]].set_index('年'))
-            chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
-            if chart_type == '折線圖':
-                st.line_chart(dfshow)
-            elif chart_type == '柱狀圖':
-                st.bar_chart(dfshow)
+            df_selected = df[multiselected_columns]
+            st.bar_chart(df_selected)
+        chart_type=st.selectbox('選擇圖表類型',['折線圖','柱狀圖'])
+        if chart_type == '折線圖':
+            st.line_chart(dfshow)
+        elif chart_type == '柱狀圖':
+            st.bar_chart(dfshow)
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
