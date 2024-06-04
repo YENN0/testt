@@ -3,9 +3,7 @@ import pandas as pd
 
 #工作列
 st.set_page_config(
-    page_title="資料分析期末",
-    layout = "wide",
-    initial_sidebar_state="auto",#auto:預設開，頁面縮小關, collapsed 預設關, expanded永久開
+    page_title="資料分析期末",\
     menu_items={
         "About":"https://www.taipower.com.tw/tc/index.aspx",
     }
