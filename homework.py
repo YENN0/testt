@@ -42,22 +42,15 @@ def main():
                 elif chart_type == '柱狀圖':
                     st.bar_chart(df_capa_show)
         with col_main2:
-            df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
-            df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
-            st.subheader('各部門用電占比')
-            multi_department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
-            if multi_department_columns:
-                df_department_selected = df_department_show[multi_department_columns]
-                st.bar_chart(df_department_selected)
-            else:
-                st.bar_chart(df_department_show)
-
-        col_main3, col_main4 = st.columns(2)
-        with col_main3:
             df_renew = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
             st.subheader('再生能源發電量')
-            renewyear = st.slider("取得資料年份", 101, 113)
-            renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
+            col_renewraw1, col_renewraw2 = st.columns([2, 1])
+            with col_renewraw1:
+                renewyear = st.slider("取得資料年份", 101, 113)
+                
+            with col_renewraw2:
+                renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
+
             df_log=df_renew[df_renew['年'] == renewyear]
             df_renewshow= df_log.loc[:,['縣市',renewtype]]
 
@@ -75,6 +68,18 @@ def main():
                 longitude='經度',
                 size= 'scaled_sizes'
             )
+            
+        col_main3, col_main4 = st.columns(2)
+        with col_main3:
+            df_department = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/DepartmentConsumption.csv')
+            df_department_show = df_department.rename(columns={'年':'index'}).set_index('index')
+            st.subheader('各部門用電占比')
+            multi_department_columns = st.multiselect('選擇要顯示的列',df_department_show.columns)
+            if multi_department_columns:
+                df_department_selected = df_department_show[multi_department_columns]
+                st.bar_chart(df_department_selected)
+            else:
+                st.bar_chart(df_department_show)
             
         with col_main4:
             st.subheader('各部門用電狀況')
