@@ -74,7 +74,7 @@ def main():
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
-                size= 'scaled_sizes'
+                size= 'scaled_sizes',
             )
             
         with col_main4:
