@@ -90,8 +90,9 @@ def main():
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
-        if show_raw:            
+        if show_raw:
             choose_option= st.selectbox('觀察表格',['各機組發電量','各部門用電','再生能源發電量'])
+            
             col_caparaw1, col_caparaw2 = st.columns([2, 1])
             if choose_option=='各機組發電量':
                 choose_data=df_capa
