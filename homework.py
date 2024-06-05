@@ -54,9 +54,16 @@ def main():
 
         col_main3, col_main4 = st.columns(2)
         with col_main3:
-            df_buy = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
-            df_buy_show = df_buy
+            df_renew = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
             st.subheader('各地區購電量')
+            renewyear = st.slider("How old are you?", 101, 113)
+            st.write("觀看 ", renewyear, "年的再生能源裝置容量")
+            renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
+            df_renew_show = df_renew[renewtype]
+            df_renew_show = df_renew_show.rename(columns={'年別':'index'}).set_index('index')
+            df_renew_show=df_renew_show.ix[renewyear]
+            st.write(df_renew_show)
+
             Taiwan = {
                 "區域": ["基隆市", "台北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"],
                 "經度": [121.627, 121.561, 121.447, 121.282, 120.979, 121.019, 120.933, 120.646, 120.479, 120.960, 120.431, 120.445,120.322,120.408,120.674,121.613,121.383,121.013,119.594,118.383,119.937],
