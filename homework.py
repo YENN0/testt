@@ -69,11 +69,12 @@ def main():
             df_tw = pd.DataFrame(Taiwan)
             df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
             
+            scaled_sizes = df_merged[renewtype] / 1000
+
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
-                size=renewtype,
-                zoom=1
+                size=scaled_sizes
             )
             
         with col_main4:
