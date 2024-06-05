@@ -69,7 +69,7 @@ def main():
             df_tw = pd.DataFrame(Taiwan)
             df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
             
-            df_merged['scaled_sizes'] = df_merged[renewtype] / 100
+            df_merged['scaled_sizes'] = df_merged[renewtype] / 50
             st.write(df_merged)
             st.map(df_merged,
                 latitude='緯度',
