@@ -56,12 +56,13 @@ def main():
         with col_main3:
             df_renew = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
             st.subheader('各地區購電量')
-            st.write(df_renew)
+            df_renew_show = df_renew_show.rename(columns={'年別':'index'}).set_index('index')
+            st.write(df_renew_show)
             renewyear = st.slider("How old are you?", 101, 113)
             st.write("觀看 ", renewyear, "年的再生能源裝置容量")
             renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
             df_renew_show = df_renew[renewtype]
-            df_renew_show = df_renew_show.rename(columns={'年別':'index'}).set_index('index')
+            
             df_renew_show=df_renew_show.ix[renewyear]
             st.write(df_renew_show)
 
