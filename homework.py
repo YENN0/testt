@@ -55,7 +55,7 @@ def main():
         col_main3, col_main4 = st.columns(2)
         with col_main3:
             df_renew = pd.read_csv('https://raw.githubusercontent.com/YENN0/testt/main/RenewableEnergyinEachCity.csv')
-            st.subheader('各地區購電量')
+            st.subheader('再生能源發電量')
             renewyear = st.slider("取得資料年份", 101, 113)
             renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
             df_log=df_renew[df_renew['年別'] == renewyear]
@@ -70,7 +70,6 @@ def main():
             df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
             
             df_merged['scaled_sizes'] = df_merged[renewtype] / 50
-            st.write(df_merged)
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
@@ -79,7 +78,7 @@ def main():
             
         with col_main4:
             st.subheader('各部門用電狀況')
-            department_columns = st.selectbox('選擇圖表類型',df_department_show.columns)
+            department_columns = st.selectbox('選擇部門',df_department_show.columns)
             df_cal_department=df_department
             df_cal_department['Difference'] = df_cal_department[department_columns].diff()
             df_cal_department = df_cal_department.dropna()
@@ -93,18 +92,25 @@ def main():
 
         if show_raw:
             col_caparaw1, col_caparaw2 = st.columns([2, 1])
-
+            choose_option= st.selectbox('觀察表格',['各機組發電量','各部門用電','再生能源發電量'])
+            if choose_option=='各機組發電量':
+                choose_data=df_capa
+            elif choose_option=='各部門用電':
+                choose_data=df_department
+            elif choose_option=='再生能源發電量':
+                choose_data=df_renew
+                
             with col_caparaw1:
                 sort_option= st.selectbox('排列方式',['年升序','年降序'])
                 if sort_option == '年升序':
-                    sored_data = df_capa.sort_values(by='年',ascending=True)
+                    sored_data = choose_data.sort_values(by='年',ascending=True)
                 else:
-                    sored_data = df_capa.sort_values(by='年',ascending=False)
+                    sored_data = choose_data.sort_values(by='年',ascending=False)
 
                 st.write(sored_data)
             with col_caparaw2:
                 st.write('數據統計摘要')
-                st.write(df_capa.describe())
+                st.write(choose_data.describe())
     with tab2:
         st.header("臺灣能源政策")
         with st.expander('前言'):
