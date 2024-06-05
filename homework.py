@@ -58,7 +58,7 @@ def main():
             st.subheader('再生能源發電量')
             renewyear = st.slider("取得資料年份", 101, 113)
             renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
-            df_log=df_renew[df_renew['年別'] == renewyear]
+            df_log=df_renew[df_renew['年'] == renewyear]
             df_renewshow= df_log.loc[:,['縣市',renewtype]]
 
             Taiwan = {
@@ -90,16 +90,16 @@ def main():
         #顯示數據
         show_raw= st.checkbox('顯示原始數據')
 
-        if show_raw:
-            col_caparaw1, col_caparaw2 = st.columns([2, 1])
+        if show_raw:            
             choose_option= st.selectbox('觀察表格',['各機組發電量','各部門用電','再生能源發電量'])
+            col_caparaw1, col_caparaw2 = st.columns([2, 1])
             if choose_option=='各機組發電量':
                 choose_data=df_capa
             elif choose_option=='各部門用電':
                 choose_data=df_department
             elif choose_option=='再生能源發電量':
                 choose_data=df_renew
-                
+
             with col_caparaw1:
                 sort_option= st.selectbox('排列方式',['年升序','年降序'])
                 if sort_option == '年升序':
