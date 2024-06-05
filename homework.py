@@ -72,7 +72,7 @@ def main():
             max_size = df_merged['renewtype'].max()
 
             # 轉換資料數值到一個合適的大小範圍，這裡使用了簡單的線性轉換
-            scaled_sizes = ((df_merged['renewtype'] - min_size) / (max_size - min_size)) * 100
+            scaled_sizes = ((df_merged[renewtype] - min_size) / (max_size - min_size)) * 100
 
             # 顯示地圖
             st.map(df_merged, zoom=7, lat=df_merged['緯度'].mean(), lon=df_merged['經度'].mean(), use_container_width=True, height=500, width=700, marker_size=scaled_sizes)
