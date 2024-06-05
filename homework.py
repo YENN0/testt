@@ -69,18 +69,10 @@ def main():
             df_tw = pd.DataFrame(Taiwan)
             df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
             
-            # 將資料數值映射到點的大小範圍
-            min_size =df_merged[renewtype].min()
-            max_size =df_merged[renewtype].max()
-
-            # 轉換資料數值到一個合適的大小範圍，這裡使用了簡單的線性轉換
-            scaled_sizes = ((df_merged[renewtype] - min_size) / (max_size - min_size)) * 100
-
-
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
-                size=scaled_sizes,
+                size=renewtype,
             )
             
         with col_main4:
