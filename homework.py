@@ -72,7 +72,7 @@ def main():
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
-                size=renewtype,
+                size=renewtype/100,
             )
             
         with col_main4:
