@@ -82,7 +82,7 @@ def main():
                 st.bar_chart(df_department_show)
             
         with col_main4:
-            st.subheader('各部門用電狀況')
+            st.subheader('各部門用電狀況年增減')
             department_columns = st.selectbox('選擇部門',df_department_show.columns)
             df_cal_department=df_department
             df_cal_department['Difference'] = df_cal_department[department_columns].diff()
