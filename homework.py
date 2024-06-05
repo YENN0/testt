@@ -59,7 +59,7 @@ def main():
             renewyear = st.slider("取得資料年份", 101, 113)
             renewtype = st.selectbox('選擇再生能源類型',['風力','太陽光電','其他(含水力)'])
             df_log=df_renew[df_renew['年別'] == renewyear]
-            df_renew_show = df_log['縣市'&renewtype]
+            df_renew_show = df_log['縣市',renewtype]
             st.write(df_renew_show)
 
             Taiwan = {
