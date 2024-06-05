@@ -69,8 +69,8 @@ def main():
             }
             df_tw = pd.DataFrame(Taiwan)
             st.write(df_tw)
-            df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
-            st.write(df_merged)
+            #df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
+            #st.write(df_merged)
             #st.map(df_merged[['緯度', '經度']])
 
         with col_main4:
