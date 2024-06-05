@@ -70,7 +70,7 @@ def main():
             df_merged = pd.merge(df_renewshow, df_tw, on='縣市', how='inner')
             
             df_merged['scaled_sizes'] = df_merged[renewtype] / 1000
-
+            st.write(df_merged)
             st.map(df_merged,
                 latitude='緯度',
                 longitude='經度',
